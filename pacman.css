@@ -1,0 +1,32 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 390px;
+    height: 300px;
+    border: solid black;
+}
+  
+.grid div {
+    width: 30px;
+    height: 30px;
+}
+
+.pac-dot {
+    background-color: green;   
+    border: 5px solid white;
+    box-sizing: border-box;
+}
+
+.wall {
+    background-color: blue;
+}
+
+.treasure {
+    background-color: red;
+    border-radius: 10px;
+}
+
+.pac-man {
+    background-color: yellow;
+    border-radius: 10px;
+}

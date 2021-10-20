@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const grid = document.querySelector('.grid');
+	const level = 1;
 	
 	//generate random map(still need to be fix)
 	// 0 - path
@@ -47,12 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			}		
 		}
 		
-		//map[5][5]=2;
 		map[5][6]=2;
-		//map[5][7]=2;
-		//map[4][5]=2;
 		map[4][6]=2;
-		//map[4][7]=2;
+		map[6][7]=0;
 		
 		count = 0;
 		i = Math.floor(Math.random() *8) + 1;
@@ -141,4 +139,30 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	document.addEventListener('keyup', movePacman);
+	
+	class ghost {
+		constructor(className, startIndex, speed) {
+			this.className = className;
+			this.startIndex = startIndex;
+			this.speed = speed;
+			this.currentIndex = startIndex;
+			this.timerId = NaN;
+		}
+	}
+	
+	
+	ghosts = [new ghost("first", 71, 250)];
+	if(level == 1)
+	{
+		ghosts = [new ghost("first", 71, 250)];
+	}
+	else
+	{
+		ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
+	}
+	
+	
+	for (var i = 0; i < ghosts.length; i++) {
+		squares[ghosts[i].currentIndex].classList.add('ghost');
+	}
 });

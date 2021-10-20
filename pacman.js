@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				count = count + 1;
 			}		
 		    
-			if(count >= 2 && map[i][j] != 2 && i != 6 && j != 6){
+			if(count >= 2 && map[i][j] != 2){
 				map[i][j] = 3;
 				adj = true;
 			}
@@ -107,6 +107,38 @@ document.addEventListener('DOMContentLoaded', () => {
 	createBoard();
 
 	//pacman
-	let pacmanIndex=84;
+	let pacmanIndex=0;
+	if(squares[84] === 3) {
+		pacmanIndex=45;
+	}
+	else
+	{
+		pacmanIndex=84;
+	}
 	squares[pacmanIndex].classList.add('pac-man');
+	
+	
+	
+	//movement
+	function movePacman(e) {
+		squares[pacmanIndex].classList.remove('pac-man');
+		
+		switch(e.keyCode) {
+			case 37:
+				if(pacmanIndex % 13 !== 0 && squares[pacmanIndex -1].classList.contains('pac-dot')) pacmanIndex -= 1;			
+				break;
+			case 38:
+				if(pacmanIndex - 13 >= 0 && squares[pacmanIndex -13].classList.contains('pac-dot')) pacmanIndex -= 13;
+				break;
+			case 39:
+				if(pacmanIndex % 13 < 13 - 1 && squares[pacmanIndex +1].classList.contains('pac-dot')) pacmanIndex += 1;
+				break;
+			case 40:
+				if (pacmanIndex + 13 < 13 * 13 && squares[pacmanIndex +13].classList.contains('pac-dot')) pacmanIndex += 13;
+				break;
+		}
+		squares[pacmanIndex].classList.add('pac-man');
+	}
+	
+	document.addEventListener('keyup', movePacman);
 });

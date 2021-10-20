@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}		
 		}
 		map[5][6]=2;
-		map[4][6]=2;
+		//map[4][6]=2;
 		map[6][6]=0;
 		
 		count = 0;
@@ -157,7 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	else
 	{
-		ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
+		//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
+		ghosts = [new ghost("first", 71, 300), new ghost("second", 71, 400)];
 	}
 	
 	

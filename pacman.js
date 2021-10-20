@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		}
-		
+
 		count = 0;
 		for(let i = 0; i < 10; i++){
 			for(let j = 0; j < 13; j++){
@@ -47,30 +47,29 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}		
 		}
-		
 		map[5][6]=2;
 		map[4][6]=2;
 		map[6][7]=0;
 		
 		count = 0;
-		i = Math.floor(Math.random() *8) + 1;
-		j = Math.floor(Math.random() *11) + 1;
 		var adj = new Boolean(false);
 		while(adj != true) {
-			if(map[i-1][j] == 1){
+			i = Math.floor(Math.random() *8) + 1;
+			j = Math.floor(Math.random() *11) + 1;
+			if(map[i-1][j] == 0){
 				count = count + 1;
 			}		
-			if(map[i+1][j] == 1){
+			if(map[i+1][j] == 0){
 				count = count + 1;
 			}				
-			if(map[i][j-1] == 1){
+			if(map[i][j-1] == 0){
 				count = count + 1;
 			}			
-			if(map[i][j+1] == 1){
+			if(map[i][j+1] == 0){
 				count = count + 1;
 			}		
 		    
-			if(count >= 2 && map[i][j] != 2){
+			if(count >= 2 && map[i][j] ==0){
 				map[i][j] = 3;
 				adj = true;
 			}
@@ -165,4 +164,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (var i = 0; i < ghosts.length; i++) {
 		squares[ghosts[i].currentIndex].classList.add('ghost');
 	}
+
 });

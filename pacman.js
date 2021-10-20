@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		map[5][6]=2;
 		map[4][6]=2;
-		map[6][7]=0;
+		map[6][6]=0;
 		
 		count = 0;
 		var adj = new Boolean(false);

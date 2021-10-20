@@ -30,3 +30,8 @@
     background-color: yellow;
     border-radius: 10px;
 }
+
+#start{
+    padding: .5em;
+    margin: .5em;
+}

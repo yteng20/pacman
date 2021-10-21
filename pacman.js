@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 3 - treasure
 	
 	const map = Array.from({ length: 10 }, () => Array.from({ length: 13 }, () => 1));
+	const map2 = [];
+	const squares = [];
 
-	function createMap()
-	{
+	function createMap(){
 		for(let i = 0; i < 10; i++){
 			for(let j = 0; j < 13; j++){
 				if(i > 0 && i < 9 && j > 0 && j < 12){
@@ -74,15 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
 				map[i][j] = 3;
 				adj = true;
 			}
+			else{
+				i = Math.floor(Math.random() *8) + 1;
+				j = Math.floor(Math.random() *11) + 1;
+			}
+			
 			count = 0;
 		}
 	}
 
-	map2 = [].concat.apply([], map);	
-	const squares = [];
-
 	//create your board
 	function createBoard() {
+		map2 = [].concat.apply([], map);	
+		const squares = [];
 		for (let i = 0; i < map2.length; i++) {
 			const square = document.createElement('div');
 			grid.appendChild(square);
@@ -114,8 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		squares[pacmanIndex].classList.add('pac-man');
 	}
 	
-	
-	
 	//movement
 	function movePacman(e) {
 		squares[pacmanIndex].classList.remove('pac-man');
@@ -146,12 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	/* Event listener */
 	button.addEventListener("click", startButton, false);
+	document.addEventListener('keyup', movePacman);
 
 	function startButton(){
 		createMap();
 		createBoard();
 		createPacman();
-		document.addEventListener('keyup', movePacman);
+		//button.removeEventListener("click", startButton, false);
 	}
 	
 	class ghost {

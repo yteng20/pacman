@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		}
-		
+
 		count = 0;
 		for(let i = 0; i < 10; i++){
 			for(let j = 0; j < 13; j++){
@@ -48,30 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}		
 		}
-		
 		map[5][6]=2;
-		map[4][6]=2;
-		map[6][7]=0;
+		//map[4][6]=2;
+		map[6][6]=0;
 		
 		count = 0;
-		i = Math.floor(Math.random() *8) + 1;
-		j = Math.floor(Math.random() *11) + 1;
 		var adj = new Boolean(false);
 		while(adj != true) {
-			if(map[i-1][j] == 1){
+			i = Math.floor(Math.random() *8) + 1;
+			j = Math.floor(Math.random() *11) + 1;
+			if(map[i-1][j] == 0){
 				count = count + 1;
 			}		
-			if(map[i+1][j] == 1){
+			if(map[i+1][j] == 0){
 				count = count + 1;
 			}				
-			if(map[i][j-1] == 1){
+			if(map[i][j-1] == 0){
 				count = count + 1;
 			}			
-			if(map[i][j+1] == 1){
+			if(map[i][j+1] == 0){
 				count = count + 1;
 			}		
+<<<<<<< HEAD
 			
 			if(count >= 2 && map[i][j] != 2){
+=======
+		    
+			if(count >= 2 && map[i][j] ==0){
+>>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 				map[i][j] = 3;
 				adj = true;
 			}
@@ -107,17 +111,58 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	//pacman
+<<<<<<< HEAD
 	function createPacman(){
 		let pacmanIndex=0;
 		if(squares[84] === 3) {
 			pacmanIndex=45;
 		}
+=======
+	let pacmanIndex=0;
+	class ghost {
+		constructor(className, currentIndex, speed) {
+			this.className = className;
+			this.speed = speed;
+			this.currentIndex = currentIndex;
+		}
+	}
+	
+	function pacmanAndGhost() {
+		if(squares[84] === 3) {
+			pacmanIndex=45;
+		}	
+>>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 		else
 		{
 			pacmanIndex=84;
 		}
+<<<<<<< HEAD
 		squares[pacmanIndex].classList.add('pac-man');
 	}
+=======
+		
+		squares[pacmanIndex].classList.add('pac-man');
+		
+		ghosts = [new ghost("first", 71, 250)];
+		if(level == 1)
+		{
+			ghosts = [new ghost("first", 71, 250)];
+		}
+		else
+		{
+			//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
+			ghosts = [new ghost("first", 71, 300), new ghost("second", 71, 400)];
+		}
+	
+	
+		for (var i = 0; i < ghosts.length; i++) {
+			squares[ghosts[i].currentIndex].classList.add('ghost');
+		}
+	}
+	
+	pacmanAndGhost()
+	
+>>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 	
 	//movement
 	function movePacman(e) {
@@ -126,22 +171,31 @@ document.addEventListener('DOMContentLoaded', () => {
 		switch(e.keyCode) {
 			//move left
 			case 37:
-				if(pacmanIndex % 13 !== 0 && squares[pacmanIndex -1].classList.contains('pac-dot')) pacmanIndex -= 1;			
+				if(pacmanIndex % 13 !== 0 && (squares[pacmanIndex -1].classList.contains('pac-dot') || squares[pacmanIndex -1].classList.contains('treasure'))) {
+					pacmanIndex -= 1;			
+				}
 				break;
 			//move up
 			case 38:
-				if(pacmanIndex - 13 >= 0 && squares[pacmanIndex -13].classList.contains('pac-dot')) pacmanIndex -= 13;
+				if(pacmanIndex - 13 >= 0 && (squares[pacmanIndex -13].classList.contains('pac-dot') || squares[pacmanIndex -13].classList.contains('treasure'))) {
+					pacmanIndex -= 13;
+				}
 				break;
 			//move right
 			case 39:
-				if(pacmanIndex % 13 < 13 - 1 && squares[pacmanIndex +1].classList.contains('pac-dot')) pacmanIndex += 1;
+				if(pacmanIndex % 13 < 13 - 1 && (squares[pacmanIndex +1].classList.contains('pac-dot') || squares[pacmanIndex +1].classList.contains('treasure'))) {
+					pacmanIndex += 1;
+				}
 				break;
 			//move down
 			case 40:
-				if (pacmanIndex + 13 < 13 * 13 && squares[pacmanIndex +13].classList.contains('pac-dot')) pacmanIndex += 13;
+				if (pacmanIndex + 13 < 13 * 13 && (squares[pacmanIndex +13].classList.contains('pac-dot') || squares[pacmanIndex +13].classList.contains('treasure'))) {
+					pacmanIndex += 13;
+				}
 				break;
 		}
 		squares[pacmanIndex].classList.add('pac-man');
+		check()
 	}
 
 	/* Selecting DOM element */
@@ -158,14 +212,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		//button.removeEventListener("click", startButton, false);
 	}
 	
-	class ghost {
-		constructor(className, startIndex, speed) {
-			this.className = className;
-			this.startIndex = startIndex;
-			this.speed = speed;
-			this.currentIndex = startIndex;
-			this.timerId = NaN;
+
+	function check() {
+		if(squares[pacmanIndex].classList.contains('ghost') )
+		{
+			alert("you loose");
+
 		}
+		if(squares[pacmanIndex].classList.contains('treasure'))
+		{
+			if(level == 1)
+			{
+				document.getElementById("button").style.visibility="visible";
+				alert("click the button for the net level");
+				level++;
+			}
+			else{
+				alert("all levels cleared");
+			}		
+		}
+<<<<<<< HEAD
 		/*
 		moveGhost(newIndex){
 			this.currentIndex = newIndex;
@@ -214,6 +280,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			*squares[ghosts[i].currentIndex].classList.add('ghost');
 		}
 		
+=======
+>>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 	}
 	*/
 });

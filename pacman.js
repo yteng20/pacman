@@ -1,18 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-	const level = 1;
 	const grid = document.querySelector('.grid');
+	const level = 1;
 	
 	//generate random map(still need to be fix)
 	// 0 - path
 	// 1 - wall
 	// 2 - ghost-lair
 	// 3 - treasure
-	
-	const map = Array.from({ length: 10 }, () => Array.from({ length: 13 }, () => 1));
-	const map2 = [];
-	const squares = [];
+ 
+  	const map = Array.from({ length: 10 }, () => Array.from({ length: 13 }, () => 1));
 
-	function createMap(){
+	function createMap()
+	{
 		for(let i = 0; i < 10; i++){
 			for(let j = 0; j < 13; j++){
 				if(i > 0 && i < 9 && j > 0 && j < 12){
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					if(map[i][j+1] == 1){
 						count = count + 1;
 					}	
-			
+		    
 					if(count != 1){
 						map[i][j] = 0;
 					}
@@ -69,29 +68,22 @@ document.addEventListener('DOMContentLoaded', () => {
 			if(map[i][j+1] == 0){
 				count = count + 1;
 			}		
-<<<<<<< HEAD
-			
-			if(count >= 2 && map[i][j] != 2){
-=======
 		    
 			if(count >= 2 && map[i][j] ==0){
->>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 				map[i][j] = 3;
 				adj = true;
 			}
-			else{
-				i = Math.floor(Math.random() *8) + 1;
-				j = Math.floor(Math.random() *11) + 1;
-			}
-			
 			count = 0;
 		}
 	}
 
+	createMap();
+	
+	map2 = [].concat.apply([], map);	
+	const squares = [];
+
 	//create your board
 	function createBoard() {
-		map2 = [].concat.apply([], map);	
-		const squares = [];
 		for (let i = 0; i < map2.length; i++) {
 			const square = document.createElement('div');
 			grid.appendChild(square);
@@ -109,15 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	}
+	createBoard();
 
 	//pacman
-<<<<<<< HEAD
-	function createPacman(){
-		let pacmanIndex=0;
-		if(squares[84] === 3) {
-			pacmanIndex=45;
-		}
-=======
 	let pacmanIndex=0;
 	class ghost {
 		constructor(className, currentIndex, speed) {
@@ -131,15 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(squares[84] === 3) {
 			pacmanIndex=45;
 		}	
->>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 		else
 		{
 			pacmanIndex=84;
 		}
-<<<<<<< HEAD
-		squares[pacmanIndex].classList.add('pac-man');
-	}
-=======
 		
 		squares[pacmanIndex].classList.add('pac-man');
 		
@@ -162,32 +143,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	pacmanAndGhost()
 	
->>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
 	
 	//movement
 	function movePacman(e) {
 		squares[pacmanIndex].classList.remove('pac-man');
 		
 		switch(e.keyCode) {
-			//move left
 			case 37:
 				if(pacmanIndex % 13 !== 0 && (squares[pacmanIndex -1].classList.contains('pac-dot') || squares[pacmanIndex -1].classList.contains('treasure'))) {
 					pacmanIndex -= 1;			
 				}
 				break;
-			//move up
 			case 38:
 				if(pacmanIndex - 13 >= 0 && (squares[pacmanIndex -13].classList.contains('pac-dot') || squares[pacmanIndex -13].classList.contains('treasure'))) {
 					pacmanIndex -= 13;
 				}
 				break;
-			//move right
 			case 39:
 				if(pacmanIndex % 13 < 13 - 1 && (squares[pacmanIndex +1].classList.contains('pac-dot') || squares[pacmanIndex +1].classList.contains('treasure'))) {
 					pacmanIndex += 1;
 				}
 				break;
-			//move down
 			case 40:
 				if (pacmanIndex + 13 < 13 * 13 && (squares[pacmanIndex +13].classList.contains('pac-dot') || squares[pacmanIndex +13].classList.contains('treasure'))) {
 					pacmanIndex += 13;
@@ -197,22 +173,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		squares[pacmanIndex].classList.add('pac-man');
 		check()
 	}
-
+	
 	/* Selecting DOM element */
 	const button = document.querySelector("button");
 
 	/* Event listener */
 	button.addEventListener("click", startButton, false);
-	document.addEventListener('keyup', movePacman);
 
 	function startButton(){
-		createMap();
-		createBoard();
-		createPacman();
-		//button.removeEventListener("click", startButton, false);
+		document.addEventListener('keyup', movePacman);
+		alert("game started");
+		window.setInterval(moveGhosts, 5000);
 	}
 	
-
 	function check() {
 		if(squares[pacmanIndex].classList.contains('ghost') )
 		{
@@ -231,57 +204,27 @@ document.addEventListener('DOMContentLoaded', () => {
 				alert("all levels cleared");
 			}		
 		}
-<<<<<<< HEAD
-		/*
-		moveGhost(newIndex){
-			this.currentIndex = newIndex;
-		}
-		*/
-	}
-	
-	
-	function createGhosts(){
-		ghosts = [new ghost("first", 71, 250)];
-		if(level == 1)
-		{
-			ghosts = [new ghost("first", 71, 250)];
-		}
-		else
-		{
-			ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
-		}
-		
-		
-		for (var i = 0; i < ghosts.length; i++) {
-			squares[ghosts[i].currentIndex].classList.add('ghost');
-		}
 	}
 
-	/*
-	*function moveGhosts(e) {
-		*window.setInterval(moveGhosts, 5000);
-		*for (var i = 0; i < ghosts.length; i++) {
-			*squares[ghosts[i].currentIndex].classList.remove('ghost');
-			*g = ghost[i]
-			*if(i == 0){
-				//moves first ghost
-				//moves left untile it cant
-				*if(g.currentIndex % 13 !== 0 && squares[g.currentIndex -1].classList.contains('pac-dot')) g.currentIndex -= 1;
-				//else moves up			
-				*if(g.currentIndex - 13 >= 0 && squares[g.currentIndex -13].classList.contains('pac-dot')) g.currentIndex -= 13;
-				//else mvoes right
-				*if(g.currentIndex % 13 < 13 - 1 && squares[g.currentIndex +1].classList.contains('pac-dot')) g.currentIndex += 1;
-				//else moves down
-				*if (g.currentIndex + 13 < 13 * 13 && squares[g.currentIndex +13].classList.contains('pac-dot')) g.currentIndex += 13;
-			}
-			else{
-				//second ghost
-			}
-			*squares[ghosts[i].currentIndex].classList.add('ghost');
+	function moveGhosts() {
+		fsquares[ghosts[i].currentIndex].classList.remove('ghost');
+		//moves first ghost
+		//moves left until it cant
+		if(g.currentIndex % 13 !== 0 && squares[g.currentIndex -1].classList.contains('pac-dot')){
+			g.currentIndex -= 1;
 		}
-		
-=======
->>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687
-	}
-	*/
+		//else moves up			
+		else if(g.currentIndex - 13 >= 0 && squares[g.currentIndex -13].classList.contains('pac-dot')){
+			g.currentIndex -= 13;
+		}
+		//else mvoes right
+		else if(g.currentIndex % 13 < 13 - 1 && squares[g.currentIndex +1].classList.contains('pac-dot')){
+			g.currentIndex += 1;
+		}
+		//else moves down
+		else if (g.currentIndex + 13 < 13 * 13 && squares[g.currentIndex +13].classList.contains('pac-dot')){
+			g.currentIndex += 13;
+		}
+		squares[ghosts[i].currentIndex].classList.add('ghost');
+	}	
 });

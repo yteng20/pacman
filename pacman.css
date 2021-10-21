@@ -23,7 +23,7 @@
 }
 
 .treasure {
-    background-color: orangered;
+    background-color:lightsalmon;
     border-radius: 10px;
 }
 
@@ -32,22 +32,20 @@
     border-radius: 10px;
 }
 
-<<<<<<< HEAD
 #start{
     padding: .5em;
     margin: .5em;
+    color:gold;
 }
 
 h1{
     color: gold;
 }
-=======
 .ghost {
 	background-color: red;
 	border-radius: 10px;
 }
 
-button {
+#button {
 	visibility: hidden;
 }
->>>>>>> 01470a038b86d2a0fd105406b0e3f3c508c55687

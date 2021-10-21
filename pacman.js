@@ -105,15 +105,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	//pacman
 	let pacmanIndex=0;
-	if(squares[84] === 3) {
-		pacmanIndex=45;
+	class ghost {
+		constructor(className, currentIndex, speed) {
+			this.className = className;
+			this.speed = speed;
+			this.currentIndex = currentIndex;
+		}
 	}
-	else
-	{
-		pacmanIndex=84;
-	}
-	squares[pacmanIndex].classList.add('pac-man');
 	
+	function pacmanAndGhost() {
+		if(squares[84] === 3) {
+			pacmanIndex=45;
+		}	
+		else
+		{
+			pacmanIndex=84;
+		}
+		
+		squares[pacmanIndex].classList.add('pac-man');
+		
+		ghosts = [new ghost("first", 71, 250)];
+		if(level == 1)
+		{
+			ghosts = [new ghost("first", 71, 250)];
+		}
+		else
+		{
+			//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
+			ghosts = [new ghost("first", 71, 300), new ghost("second", 71, 400)];
+		}
+	
+	
+		for (var i = 0; i < ghosts.length; i++) {
+			squares[ghosts[i].currentIndex].classList.add('ghost');
+		}
+	}
+	
+	pacmanAndGhost()
 	
 	
 	//movement
@@ -122,48 +150,50 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		switch(e.keyCode) {
 			case 37:
-				if(pacmanIndex % 13 !== 0 && squares[pacmanIndex -1].classList.contains('pac-dot')) pacmanIndex -= 1;			
+				if(pacmanIndex % 13 !== 0 && (squares[pacmanIndex -1].classList.contains('pac-dot') || squares[pacmanIndex -1].classList.contains('treasure'))) {
+					pacmanIndex -= 1;			
+				}
 				break;
 			case 38:
-				if(pacmanIndex - 13 >= 0 && squares[pacmanIndex -13].classList.contains('pac-dot')) pacmanIndex -= 13;
+				if(pacmanIndex - 13 >= 0 && (squares[pacmanIndex -13].classList.contains('pac-dot') || squares[pacmanIndex -13].classList.contains('treasure'))) {
+					pacmanIndex -= 13;
+				}
 				break;
 			case 39:
-				if(pacmanIndex % 13 < 13 - 1 && squares[pacmanIndex +1].classList.contains('pac-dot')) pacmanIndex += 1;
+				if(pacmanIndex % 13 < 13 - 1 && (squares[pacmanIndex +1].classList.contains('pac-dot') || squares[pacmanIndex +1].classList.contains('treasure'))) {
+					pacmanIndex += 1;
+				}
 				break;
 			case 40:
-				if (pacmanIndex + 13 < 13 * 13 && squares[pacmanIndex +13].classList.contains('pac-dot')) pacmanIndex += 13;
+				if (pacmanIndex + 13 < 13 * 13 && (squares[pacmanIndex +13].classList.contains('pac-dot') || squares[pacmanIndex +13].classList.contains('treasure'))) {
+					pacmanIndex += 13;
+				}
 				break;
 		}
 		squares[pacmanIndex].classList.add('pac-man');
+		check()
 	}
 	
 	document.addEventListener('keyup', movePacman);
 	
-	class ghost {
-		constructor(className, startIndex, speed) {
-			this.className = className;
-			this.startIndex = startIndex;
-			this.speed = speed;
-			this.currentIndex = startIndex;
-			this.timerId = NaN;
+
+	function check() {
+		if(squares[pacmanIndex].classList.contains('ghost') )
+		{
+			alert("you loose");
+
+		}
+		if(squares[pacmanIndex].classList.contains('treasure'))
+		{
+			if(level == 1)
+			{
+				document.getElementById("button").style.visibility="visible";
+				alert("click the button for the net level");
+				level++;
+			}
+			else{
+				alert("all levels cleared");
+			}		
 		}
 	}
-	
-	
-	ghosts = [new ghost("first", 71, 250)];
-	if(level == 1)
-	{
-		ghosts = [new ghost("first", 71, 250)];
-	}
-	else
-	{
-		//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
-		ghosts = [new ghost("first", 71, 300), new ghost("second", 71, 400)];
-	}
-	
-	
-	for (var i = 0; i < ghosts.length; i++) {
-		squares[ghosts[i].currentIndex].classList.add('ghost');
-	}
-
 });

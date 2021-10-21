@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				ghosts[i].currentIndex = ghosts[i].starterindex;
 				end = true;
 			}
-			alert("You loose");			
+			alert("You lose.");			
 		}
 		if(squares[pacmanIndex].classList.contains('treasure'))
 		{
@@ -260,11 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			if(level == 1)
 			{
 				document.getElementById("button").style.visibility="visible";
-				alert("Click the button for the next level");
+				alert("First level cleared. Click 'Next Level' to move on.");
 				level = 2;
 			}
 			else{
-				alert("All levels cleared");
+				alert("You win! All levels cleared.");
 			}		
 			end = true;			
 		}

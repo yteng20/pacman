@@ -27,6 +27,11 @@
     border-radius: 10px;
 }
 
+.ghost {
+	background-color: red;
+	border-radius: 10px;
+}
+
 .pac-man {
     background-color: yellow;
     border-radius: 10px;
@@ -40,10 +45,6 @@
 
 h1{
     color: gold;
-}
-.ghost {
-	background-color: red;
-	border-radius: 10px;
 }
 
 #button {

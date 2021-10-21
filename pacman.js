@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	createMap();
-	
-	map2 = [].concat.apply([], map);	
+		
+	map2 = [].concat.apply([], map);
 	const squares = [];
 
 	//create your board
@@ -112,7 +112,30 @@ document.addEventListener('DOMContentLoaded', () => {
 			this.speed = speed;
 			this.currentIndex = currentIndex;
 		}
+		move(){
+			squares[this.currentIndex].classList.add('pac-dot');
+			squares[this.currentIndex].classList.remove('ghost');
+			//moves left until it cant
+			if(this.currentIndex % 13 !== 0 && squares[this.currentIndex -1].classList.contains('pac-dot')){
+				this.currentIndex -= 1;
+			}
+			//else moves up			
+			else if(this.currentIndex - 13 >= 0 && squares[this.currentIndex -13].classList.contains('pac-dot')){
+				this.currentIndex -= 13;
+			}
+			//else mvoes right
+			else if(this.currentIndex % 13 < 13 - 1 && squares[this.currentIndex +1].classList.contains('pac-dot')){
+				this.currentIndex += 1;
+			}
+			//else moves down
+			else if (this.currentIndex + 13 < 13 * 13 && squares[this.currentIndex +13].classList.contains('pac-dot')){
+				this.currentIndex += 13;
+			}
+			squares[this.currentIndex].classList.add('ghost');
+		}
 	}
+
+	ghosts = [];
 	
 	function pacmanAndGhost() {
 		if(squares[84] === 3) {
@@ -124,21 +147,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		
 		squares[pacmanIndex].classList.add('pac-man');
-		
-		alert(level);
+
+		for (var i = 0; i < ghosts.length; i++) {
+			squares[ghosts[i].currentIndex].classList.add('pac-dot');
+			squares[ghosts[i].currentIndex].classList.remove('ghost');
+		}
+
 		if(level == 1 && level != 2)
 		{
 			ghosts = [new ghost("first", 71, 250)];
-			alert("one ghost");
 		}
 		else
 		{
 			//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
-			alert("second ghost");
-			ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
+			ghosts = [new ghost("first", 34, 300), new ghost("second", 58, 400)];
 		}
 	
 		for (var i = 0; i < ghosts.length; i++) {
+			squares[ghosts[i].currentIndex].classList.remove('pac-dot');
 			squares[ghosts[i].currentIndex].classList.add('ghost');
 		}
 	}
@@ -189,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function nextButton(){
-		alert("level 2");
 		pacmanAndGhost();
 	}
 	
@@ -201,10 +226,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		if(squares[pacmanIndex].classList.contains('treasure'))
 		{
+			squares[pacmanIndex].classList.remove('pac-man');
+
 			if(level == 1)
 			{
 				document.getElementById("button").style.visibility="visible";
-				squares[pacmanIndex].classList.remove('pac-man');
 				alert("Click the button for the next level");
 				level = 2;
 			}
@@ -215,24 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function moveGhosts() {
-		squares[ghosts[i].currentIndex].classList.remove('ghost');
-		//moves first ghost
-		//moves left until it cant
-		if(g.currentIndex % 13 !== 0 && squares[g.currentIndex -1].classList.contains('pac-dot')){
-			g.currentIndex -= 1;
+		for (var i = 0; i < ghosts.length; i++) {
+			ghosts[i].move();
 		}
-		//else moves up			
-		else if(g.currentIndex - 13 >= 0 && squares[g.currentIndex -13].classList.contains('pac-dot')){
-			g.currentIndex -= 13;
-		}
-		//else mvoes right
-		else if(g.currentIndex % 13 < 13 - 1 && squares[g.currentIndex +1].classList.contains('pac-dot')){
-			g.currentIndex += 1;
-		}
-		//else moves down
-		else if (g.currentIndex + 13 < 13 * 13 && squares[g.currentIndex +13].classList.contains('pac-dot')){
-			g.currentIndex += 13;
-		}
-		squares[ghosts[i].currentIndex].classList.add('ghost');
 	}	
 });

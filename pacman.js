@@ -115,20 +115,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		move(){
 			squares[this.currentIndex].classList.add('pac-dot');
 			squares[this.currentIndex].classList.remove('ghost');
+			let direction = Math.floor(Math.random() * 3);
+			//0 = left, 1 = right, 2 = up, 3 = down
 			//moves left until it cant
-			if(this.currentIndex % 13 !== 0 && squares[this.currentIndex -1].classList.contains('pac-dot')){
+			if(direction == 0 && this.currentIndex % 13 !== 0&& squares[this.currentIndex -1].classList.contains('pac-dot')){
 				this.currentIndex -= 1;
 			}
 			//else moves up			
-			else if(this.currentIndex - 13 >= 0 && squares[this.currentIndex -13].classList.contains('pac-dot')){
+			else if(this.currentIndex - 13 >= 0 && direction == 2 && squares[this.currentIndex -13].classList.contains('pac-dot')){
 				this.currentIndex -= 13;
 			}
 			//else mvoes right
-			else if(this.currentIndex % 13 < 13 - 1 && squares[this.currentIndex +1].classList.contains('pac-dot')){
+			else if(this.currentIndex % 13 < 13 - 1 && direction == 1 && squares[this.currentIndex +1].classList.contains('pac-dot')){
 				this.currentIndex += 1;
 			}
 			//else moves down
-			else if (this.currentIndex + 13 < 13 * 13 && squares[this.currentIndex +13].classList.contains('pac-dot')){
+			else if (this.currentIndex + 13 < 13 * 13 && direction == 3 && squares[this.currentIndex +13].classList.contains('pac-dot')){
 				this.currentIndex += 13;
 			}
 			squares[this.currentIndex].classList.add('ghost');
@@ -211,23 +213,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function startButton(){
 		document.addEventListener('keyup', movePacman);
-		window.setInterval(moveGhosts, 5000);
+		ghostInterval = setInterval(moveGhosts, 1000);
 	}
 
 	function nextButton(){
 		pacmanAndGhost();
+		ghostInterval = setInterval(moveGhosts, 750);
 	}
 	
 	function check() {
-		if(squares[pacmanIndex].classList.contains('ghost') )
+		if(squares[pacmanIndex].classList.contains('ghost'))
 		{
-			alert("You loose");
-
+			squares[pacmanIndex].classList.remove('pac-man');
+			pacmanIndex = -1;
+			alert("You lose");
+			window.clearInterval(ghostInterval);
 		}
 		if(squares[pacmanIndex].classList.contains('treasure'))
 		{
+			window.clearInterval(ghostInterval);
 			squares[pacmanIndex].classList.remove('pac-man');
-
+			pacmanIndex = 0;
 			if(level == 1)
 			{
 				document.getElementById("button").style.visibility="visible";

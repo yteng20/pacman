@@ -12,8 +12,9 @@
 }
 
 .pac-dot {
-    background-color: green;   
+    background-color: lightgreen;   
     border: 5px solid white;
+	border-radius: 10px;
     box-sizing: border-box;
 }
 
@@ -22,11 +23,20 @@
 }
 
 .treasure {
-    background-color: red;
+    background-color: orangered;
     border-radius: 10px;
 }
 
 .pac-man {
     background-color: yellow;
     border-radius: 10px;
+}
+
+.ghost {
+	background-color: red;
+	border-radius: 10px;
+}
+
+button {
+	visibility: hidden;
 }

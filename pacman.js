@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const grid = document.querySelector('.grid');
-	const level = 1;
+	level = 1;
 	
 	//generate random map(still need to be fix)
 	// 0 - path
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				count = count + 1;
 			}		
 		    
-			if(count >= 2 && map[i][j] ==0){
+			if(count >= 2 && map[i][j] == 0){
 				map[i][j] = 3;
 				adj = true;
 			}
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			} else if (map2[i] === 1) {
 				squares[i].classList.add('wall');
 			} else if (map2[i] === 2) {
-				squares[i].classList.add('ghost-lair');
+				squares[i].classList.add('ghost');
 			} else if (map2[i] === 3) {
 				squares[i].classList.add('treasure');
 			}
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	//pacman
 	let pacmanIndex=0;
+
 	class ghost {
 		constructor(className, currentIndex, speed) {
 			this.className = className;
@@ -124,17 +125,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		squares[pacmanIndex].classList.add('pac-man');
 		
-		ghosts = [new ghost("first", 71, 250)];
-		if(level == 1)
+		alert(level);
+		if(level == 1 && level != 2)
 		{
 			ghosts = [new ghost("first", 71, 250)];
+			alert("one ghost");
 		}
 		else
 		{
 			//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
-			ghosts = [new ghost("first", 71, 300), new ghost("second", 71, 400)];
+			alert("second ghost");
+			ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
 		}
-	
 	
 		for (var i = 0; i < ghosts.length; i++) {
 			squares[ghosts[i].currentIndex].classList.add('ghost');
@@ -174,22 +176,27 @@ document.addEventListener('DOMContentLoaded', () => {
 		check()
 	}
 	
-	/* Selecting DOM element */
-	const button = document.querySelector("button");
+	const startbutton = document.querySelector("#start");
+	const nextbutton = document.querySelector("#button");
 
 	/* Event listener */
-	button.addEventListener("click", startButton, false);
+	startbutton.addEventListener("click", startButton, false);
+	nextbutton.addEventListener("click", nextButton, false);
 
 	function startButton(){
 		document.addEventListener('keyup', movePacman);
-		alert("game started");
 		window.setInterval(moveGhosts, 5000);
+	}
+
+	function nextButton(){
+		alert("level 2");
+		pacmanAndGhost();
 	}
 	
 	function check() {
 		if(squares[pacmanIndex].classList.contains('ghost') )
 		{
-			alert("you loose");
+			alert("You loose");
 
 		}
 		if(squares[pacmanIndex].classList.contains('treasure'))
@@ -197,17 +204,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			if(level == 1)
 			{
 				document.getElementById("button").style.visibility="visible";
-				alert("click the button for the net level");
-				level++;
+				squares[pacmanIndex].classList.remove('pac-man');
+				alert("Click the button for the next level");
+				level = 2;
 			}
 			else{
-				alert("all levels cleared");
+				alert("All levels cleared");
 			}		
 		}
 	}
 
 	function moveGhosts() {
-		fsquares[ghosts[i].currentIndex].classList.remove('ghost');
+		squares[ghosts[i].currentIndex].classList.remove('ghost');
 		//moves first ghost
 		//moves left until it cant
 		if(g.currentIndex % 13 !== 0 && squares[g.currentIndex -1].classList.contains('pac-dot')){

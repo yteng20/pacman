@@ -32,7 +32,7 @@
     border-radius: 10px;
 }
 
-#start{
+#start, #button{
     padding: .5em;
     margin: .5em;
     color:gold;

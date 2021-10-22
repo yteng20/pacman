@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}		
 		}
 		//map[5][6]=2;
-		//map[4][6]=2;
+		map[4][6]=0;
 		map[6][6]=0;
 		
 		count = 0;

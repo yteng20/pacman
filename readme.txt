@@ -11,7 +11,9 @@ class interactions. We argue this demonstrates a clear application of the broade
 of JS in a way which builds upon their use in a fun and visual way. Furthermore, while no libraries 
 are used, other aspects of complexity still arise in our standard JS; the random map generation, using 
 the Math .random and .floor functions, demonstrates randomness which is accounted for such that the maps 
-it generates should, in theory, be generally unique and shouldn't be bugged upon load. This, in the context 
+it generates should, in theory, be generally unique and shouldn't be bugged upon load. The ghosts also display
+random unpredictable movement that utilizes the setInterval function of the window 
+to repeatedly make random movements. This, in the context 
 of the game, adds some fun replayability; and, within the code, demonstrates further complexity.
 Finally, despite the building blocks of the project being relatively simple to understand and
 use JS elements, we felt that adding a degree of polish to the code to avoid bugs wherever possible

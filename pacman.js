@@ -230,10 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	function startButton(){
 		document.addEventListener('keyup', movePacman);
 		end = false;		
-		window.setInterval(moveGhosts, 100);
+		window.setInterval(moveGhosts, 500);
 	}
 
 	function nextButton(){
+		window.setInterval(moveGhosts, 250);
 		pacmanAndGhost();
 	}
 	

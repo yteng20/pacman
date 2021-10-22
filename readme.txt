@@ -1,6 +1,23 @@
 pacman readme
 
-Include a README.txt file to justify why your project is worth 100 points.
+Why is your project worth 100 points?
+
+Broadly speaking, there's a non-zero degree of complexity to creating a grid / maze exploration
+algorithm, and our code has a few elements which help that complexity shine.
+To begin with, the use of rather simple JS elements ala the array grid which comprises
+the board, along with careful indexing and checks to ensure the game doesn't break on loading
+or during play, more or less makes up the entirety of game code, along with the ghost and player 
+class interactions. We argue this demonstrates a clear application of the broader possibilities 
+of JS in a way which builds upon their use in a fun and visual way. Furthermore, while no libraries 
+are used, other aspects of complexity still arise in our standard JS; the random map generation, using 
+the Math .random and .floor functions, demonstrates randomness which is accounted for such that the maps 
+it generates should, in theory, be generally unique and shouldn't be bugged upon load. This, in the context 
+of the game, adds some fun replayability; and, within the code, demonstrates further complexity.
+Finally, despite the building blocks of the project being relatively simple to understand and
+use JS elements, we felt that adding a degree of polish to the code to avoid bugs wherever possible
+and generally making the game look good and comprehensible to a degree could do wonders to
+compensate for the simplicity of the mechanics. Which, hopefully, would work alongside the
+random generation to really help our project shine.
 
 Did you use any cool JavaScript libraries?
 

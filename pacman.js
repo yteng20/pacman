@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	Velocity(document.getElementById("pacman"), "fadeIn", { duration: 1500 });
+	Velocity(document.getElementById("level_number"), "fadeIn", { duration: 1500, delay: 1500});
 
 	const grid = document.querySelector('.grid');
 	level = 1;
@@ -262,6 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById("button").style.visibility="visible";
 				alert("First level cleared. Click 'Next Level' to move on.");
 				level = 2;
+				document.getElementById("level_number").innerHTML = "2";
+				Velocity(document.getElementById("level_number"), "fadeIn", { duration: 1500});
 			}
 			else{
 				alert("You win! All levels cleared.");

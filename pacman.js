@@ -246,10 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(squares[pacmanIndex].classList.contains('ghost') )
 		{	
 			for (var i = 0; i < ghosts.length; i++) {
-				//squares[ghosts[i].currentIndex].classList.remove('ghost');
-				//squares[pacmanIndex].classList.remove('ghost');
-				//squares[ghosts[i].starterindex].classList.add('ghost');
-				ghosts[i].currentIndex = ghosts[i].starterindex;
+				squares[ghosts[i].currentIndex].classList.remove('ghost');
+				squares[pacmanIndex].classList.add('ghost');
+				squares[ghosts[i].starterindex].classList.add('ghost');
+				//ghosts[i].currentIndex = ghosts[i].starterindex;
 				end = true;
 			}
 			alert("You lose.");
@@ -268,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			else{
 				alert("You win! All levels cleared.");
-				document.getElementsByClassName('grid').style.visibility = hidden;
 			}
 			end = true;			
 		}

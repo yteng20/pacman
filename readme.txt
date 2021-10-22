@@ -23,7 +23,10 @@ random generation to really help our project shine.
 
 Did you use any cool JavaScript libraries?
 
-N/A, pure JS code used.
+We used velocity.js to add some cool effects to the title and level number.
+The title fades is then the level number fades in. When the level changes 
+the new level number is faded in. The code looks like:
+Velocity(document.getElementById("pacman"), "fadeIn", { duration: 1500 });
 
 What nifty features of your program were a bear to implement?
 

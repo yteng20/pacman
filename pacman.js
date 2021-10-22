@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const grid = document.querySelector('.grid');
 	level = 1;
-	
 	let end = false;
 
 	//generate random map(still need to be fix)
@@ -145,9 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						this.currentIndex += 13;
 					}
 					break;
-				default: this.currentIndex += 0;
 			}
-			squares[this.currentIndex].classList.remove('pac-dot');
 			squares[this.currentIndex].classList.add('ghost');
 		}
 	}
@@ -232,9 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function startButton(){
 		document.addEventListener('keyup', movePacman);
-		ghostInterval = setInterval(moveGhosts, 1000);
 		end = false;		
-		window.setInterval(moveGhosts, 1000);
+		window.setInterval(moveGhosts, 100);
 	}
 
 	function nextButton(){
@@ -245,13 +241,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(squares[pacmanIndex].classList.contains('ghost') )
 		{	
 			for (var i = 0; i < ghosts.length; i++) {
-				//squares[ghosts[i].currentIndex].classList.remove('ghost');
-				squares[pacmanIndex].classList.remove('pac-man');
-				//squares[ghosts[i].starterindex].classList.add('ghost');
+				squares[ghosts[i].currentIndex].classList.remove('ghost');
+				squares[pacmanIndex].classList.remove('ghost');
+				squares[ghosts[i].starterindex].classList.add('ghost');
 				ghosts[i].currentIndex = ghosts[i].starterindex;
 				end = true;
 			}
-			alert("You loose");			
+			alert("You lose.");			
 		}
 		if(squares[pacmanIndex].classList.contains('treasure'))
 		{
@@ -260,12 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			if(level == 1)
 			{
 				document.getElementById("button").style.visibility="visible";
-				alert("Click the button for the next level");
+				alert("First level cleared. Click 'Next Level' to move on.");
 				level = 2;
 			}
 			else{
-				alert("All levels cleared");
-			}		
+				alert("You win! All levels cleared.");
+			}
 			end = true;			
 		}
 	}

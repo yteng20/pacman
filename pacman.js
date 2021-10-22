@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			}		
 		}
-		map[5][6]=2;
+		//map[5][6]=2;
 		//map[4][6]=2;
 		map[6][6]=0;
 		
@@ -123,25 +123,25 @@ document.addEventListener('DOMContentLoaded', () => {
 			switch(i) {
 				case 0:
 				//moves left until it cant
-					if(this.currentIndex % 13 !== 0 && !squares[this.currentIndex -1].classList.contains('ghost') && !squares[this.currentIndex -1].classList.contains('wall')){
+					if(this.currentIndex % 13 !== 0 && !squares[this.currentIndex -1].classList.contains('ghost')  && !squares[this.currentIndex -1].classList.contains('wall') && !squares[this.currentIndex -1].classList.contains('treasure')){
 						this.currentIndex -= 1;
 					}
 					break;
 				//else moves up		
 				case 1:
-					if(this.currentIndex - 13 >= 0 && !squares[this.currentIndex -13].classList.contains('ghost') && !squares[this.currentIndex -13].classList.contains('wall')){
+					if(this.currentIndex - 13 >= 0 && !squares[this.currentIndex -13].classList.contains('ghost') && !squares[this.currentIndex -13].classList.contains('wall') && !squares[this.currentIndex -13].classList.contains('treasure')){
 						this.currentIndex -= 13;
 					}
 					break;
 					//else mvoes right
 				case 2:
-					if(this.currentIndex % 13 < 13 - 1 && !squares[this.currentIndex +1].classList.contains('ghost') && !squares[this.currentIndex +1].classList.contains('wall')){
+					if(this.currentIndex % 13 < 13 - 1 && !squares[this.currentIndex +1].classList.contains('ghost') && !squares[this.currentIndex +1].classList.contains('wall') && !squares[this.currentIndex +1].classList.contains('treasure')){
 						this.currentIndex += 1;
 					}
 					break;
 				//else moves down
 				case 3:
-					if (this.currentIndex + 13 < 13 * 13 && !squares[this.currentIndex+13].classList.contains('ghost') && !squares[this.currentIndex +13].classList.contains('wall')){
+					if (this.currentIndex + 13 < 13 * 13 && !squares[this.currentIndex+13].classList.contains('ghost') && !squares[this.currentIndex +13].classList.contains('wall') && !squares[this.currentIndex +13].classList.contains('treasure')){
 						this.currentIndex += 13;
 					}
 					break;
@@ -170,14 +170,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			squares[ghosts[i].currentIndex].classList.remove('ghost');
 		}
 
-		if(level == 1 && level != 2)
+		if(level == 1)
 		{
-			ghosts = [new ghost("first", 71, 250)];
+			ghosts = [new ghost("first", 68, 250), new ghost("second", 23, 250), new ghost("third", 47, 250)];
 		}
 		else
 		{
 			//ghosts = [new ghost("first", 71, 300), new ghost("second", 58, 400)];
-			ghosts = [new ghost("first", 34, 300), new ghost("second", 58, 400)];
+			ghosts = [new ghost("first", 68, 250), new ghost("second", 23, 250), new ghost("third", 47, 250), new ghost("fourth", 75, 500)];
 		}
 	
 		for (var i = 0; i < ghosts.length; i++) {

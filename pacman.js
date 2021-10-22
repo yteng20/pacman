@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+	Velocity(document.getElementById("pacman"), "fadeIn", { duration: 1500 });
+
 	const grid = document.querySelector('.grid');
 	level = 1;
 	let end = false;
@@ -145,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 					break;
 			}
+			squares[this.currentIndex].classList.remove('pac-dot');
 			squares[this.currentIndex].classList.add('ghost');
 		}
 	}
@@ -242,13 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(squares[pacmanIndex].classList.contains('ghost') )
 		{	
 			for (var i = 0; i < ghosts.length; i++) {
-				squares[ghosts[i].currentIndex].classList.remove('ghost');
-				squares[pacmanIndex].classList.remove('ghost');
-				squares[ghosts[i].starterindex].classList.add('ghost');
+				//squares[ghosts[i].currentIndex].classList.remove('ghost');
+				//squares[pacmanIndex].classList.remove('ghost');
+				//squares[ghosts[i].starterindex].classList.add('ghost');
 				ghosts[i].currentIndex = ghosts[i].starterindex;
 				end = true;
 			}
-			alert("You lose.");			
+			alert("You lose.");
 		}
 		if(squares[pacmanIndex].classList.contains('treasure'))
 		{
@@ -262,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			else{
 				alert("You win! All levels cleared.");
+				document.getElementsByClassName('grid').style.visibility = hidden;
 			}
 			end = true;			
 		}

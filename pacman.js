@@ -246,10 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(squares[pacmanIndex].classList.contains('ghost') )
 		{	
 			for (var i = 0; i < ghosts.length; i++) {
-				squares[ghosts[i].currentIndex].classList.remove('ghost');
-				squares[pacmanIndex].classList.add('ghost');
-				squares[ghosts[i].starterindex].classList.add('ghost');
-				//ghosts[i].currentIndex = ghosts[i].starterindex;
+				squares[ghosts[i].currentIndex].classList.remove('pac-man');
+				//squares[pacmanIndex].classList.add('ghost');
+				//squares[ghosts[i].starterindex].classList.add('ghost');
 				end = true;
 			}
 			alert("You lose.");
